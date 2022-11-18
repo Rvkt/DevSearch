@@ -5,8 +5,10 @@ from django.http import HttpResponse
 
 
 def projects(request):
-    return HttpResponse('This is the projects page!!')
+    # return HttpResponse('This is the projects page!!')
+    return render(request, 'projects/projects.html')
 
 
 def project(request, pk):
-    return HttpResponse("This is project" + " " + str(pk))
+    # return HttpResponse("This is project" + " " + str(pk))
+    return render(request, 'projects/single-project.html')
