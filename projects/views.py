@@ -27,7 +27,12 @@ def projects(request):
 
 
 def project(request, pk):
-    return render(request, 'projects/single-project.html')
+    projectObj = None
+    for i in projectsList:
+        if i['id'] == pk:
+            projectObj = i
+    context = {'project': projectObj}
+    return render(request, 'projects/single-project.html', context)
 
 
 def createProject(request):
