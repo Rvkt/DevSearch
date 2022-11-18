@@ -3,10 +3,12 @@
 <h1>Projects Page</h1>
 <ul>
     {% for project in projects %}
-    <li><h2>Title: {{ project.title }}</h2></li>
-    <ul>
-        <li><i>{{ project.description }}</i></li>
-    </ul>
+    <li>
+        <h3>Title: {{ project.title }} <a href="project/{{ project.id }}/">view</a></h3>
+        <!-- Django way to reference -->
+        <h3>Title: {{ project.title }} <a href="{% url 'project' project.id %}">view</a></h3>
+    </li>
+
     {% endfor %}
 </ul>
 
