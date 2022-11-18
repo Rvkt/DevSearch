@@ -1,11 +1,10 @@
 from django.contrib import admin
 from django.urls import path
-
 from django.http import HttpResponse
 
 
 def projects(request):
-    return HttpResponse("This is projects page!!")
+    return HttpResponse('This is the projects page!!')
 
 
 def project(request):
@@ -14,6 +13,8 @@ def project(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('projects/', projects, name="projects"),
     path('project/', project, name="project"),
+    path('projects/', projects, name="projects"),
 ]
+
+# path('urlName/', function_Name, name="ReferenceName"),
