@@ -7,14 +7,14 @@ def projects(request):
     return HttpResponse('This is the projects page!!')
 
 
-def project(request):
-    return HttpResponse("This is single project page!!")
+def project(request, pk):
+    return HttpResponse("This is project" + " " + str(pk))
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('project/', project, name="project"),
     path('projects/', projects, name="projects"),
+    path('project/<str:pk>/', project, name="project"),
 ]
 
 # path('urlName/', function_Name, name="ReferenceName"),
