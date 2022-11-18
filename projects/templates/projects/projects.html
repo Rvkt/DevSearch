@@ -4,7 +4,7 @@
 <ul>
     {% for project in projects %}
     <li>
-        <!-- Django way to reference -->
+        <!-- Django way to reference a project -->
         <h3>Title: {{ project.title }} <a href="{% url 'project' project.id %}">view</a></h3>
     </li>
 
