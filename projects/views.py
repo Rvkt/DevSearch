@@ -10,11 +10,9 @@ def projects(request):
 
 
 def project(request, pk):
-    projectObj = None
-    for i in projects:
-        if i['id'] == pk:
-            projectObj = i
-    context = {'project': projectObj}
+    projectObj = Project.objects.get(id=pk)
+    tag = projectObj.tags.all()
+    context = {'project': projectObj, 'tags': tag}
     return render(request, 'projects/single-project.html', context)
 
 

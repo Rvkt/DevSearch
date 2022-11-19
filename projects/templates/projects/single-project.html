@@ -1,11 +1,16 @@
 {% extends 'main.html' %} {% block content %}
 
 <h1>Single Project Page</h1>
+{% for tag in tags %}
+<span style="border: solid 1px grey; padding: 0.3em; margin: 0.7em">
+    <b><i>{{ tag }}</i></b>
+</span>
+
+{% endfor %}
 <ul>
     <li><h2>Title: {{ project.title }}</h2></li>
-    <ul>
-        <li><i>{{ project.description }}</i></li>
-    </ul>
+
+    <li><i>{{ project.description }}</i></li>
 </ul>
 
 {% endblock content %}
