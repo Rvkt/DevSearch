@@ -1,16 +1,22 @@
-{% extends 'main.html' %} {% block content %}
-
-<h1>Single Project Page</h1>
-{% for tag in tags %}
-<span style="border: solid 1px grey; padding: 0.3em; margin: 0.7em">
-    <b><i>{{ tag }}</i></b>
+{% extends 'main.html' %} {% block content %} {% for tag in tags %}
+<span
+    style="
+        border: solid 1px rgb(15, 15, 15, 0.2);
+        background-color: crimson;
+        color: rgb(255, 255, 255);
+        padding: 0.3em;
+        margin: 0.7em;
+        border-radius: 10px;
+    "
+>
+    <b>{{ tag }}</b>
 </span>
 
 {% endfor %}
 <ul>
-    <li><h2>Title: {{ project.title }}</h2></li>
+    <li style="list-style: none"><h2>{{ project.title }}</h2></li>
 
-    <li><i>{{ project.description }}</i></li>
+    <li style="list-style: none"><i>{{ project.description }}</i></li>
 </ul>
 
 {% endblock content %}
