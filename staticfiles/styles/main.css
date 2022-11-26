@@ -1,0 +1,12 @@
+a {
+    color: red;
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+.logo {
+    background-color: burlywood;
+}
