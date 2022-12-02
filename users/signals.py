@@ -7,7 +7,7 @@ from django.dispatch import receiver
 from .models import Profile
 
 
-@receiver(post_save, sender=Profile)
+# @receiver(post_save, sender=Profile)
 def createProfile(sender, instance, created, **kwargs):
     if created:
         user = instance
