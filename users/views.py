@@ -10,22 +10,6 @@ from .models import Profile
 from .forms import CustomUserCreationForm
 
 
-def profiles(request):
-    profiles = Profile.objects.all()
-    context = {'profiles': profiles}
-    return render(request, 'users/profiles.html', context)
-
-
-def userProfile(request, pk):
-    profile = Profile.objects.get(id=pk)
-
-    topSkills = profile.skill_set.exclude(description__exact="")
-    otherSkills = profile.skill_set.filter(description="")
-    context = {'profile': profile, 'topSkills': topSkills,
-               'otherSkills': otherSkills}
-    return render(request, 'users/user-profile.html', context)
-
-
 def loginUser(request):
 
     page = 'login'
@@ -43,7 +27,6 @@ def loginUser(request):
         try:
             user = User.objects.get(username=user)
         except:
-            # print('Username does not exists!!!!')
             messages.error(request, 'Username does not exist')
 
         user = authenticate(request, username=username, password=password)
@@ -52,7 +35,6 @@ def loginUser(request):
         if user is not None:
             login(request, user)
         else:
-            # print('Username or Password is incorrect')
             messages.error(request, 'Username OR Password is incorrect')
 
         return redirect('profiles')
@@ -66,7 +48,9 @@ def logoutUser(request):
 
 
 def registerUser(request):
+
     page = 'register'
+
     form = CustomUserCreationForm()
 
     if request.method == "POST":
@@ -80,10 +64,37 @@ def registerUser(request):
                 request, 'Congratulations, Your Account has been created.')
 
             login(request, user)
-            return redirect('profiles')
+            return redirect('account')
 
         else:
             messages.error(request, 'error')
 
     context = {'page': page, 'form': form}
     return render(request, 'users/login-register.html', context)
+
+
+def profiles(request):
+    profiles = Profile.objects.all()
+    context = {'profiles': profiles}
+    return render(request, 'users/profiles.html', context)
+
+
+def userProfile(request, pk):
+    profile = Profile.objects.get(id=pk)
+
+    topSkills = profile.skill_set.exclude(description__exact="")
+    otherSkills = profile.skill_set.filter(description="")
+    context = {'profile': profile, 'topSkills': topSkills,
+               'otherSkills': otherSkills}
+    return render(request, 'users/user-profile.html', context)
+
+
+@login_required(login_url='login')
+def userAccount(request):
+    profile = request.user.profile
+
+    skills = profile.skill_set.all()
+    projects = profile.project_set.all()
+
+    context = {'profile': profile, 'skills': skills, 'projects': projects}
+    return render(request, 'users/account.html', context)
