@@ -7,6 +7,7 @@ from django.shortcuts import redirect, render
 from django.urls import conf
 
 from .models import Profile
+from .forms import CustomUserCreationForm
 
 
 def profiles(request):
@@ -27,13 +28,15 @@ def userProfile(request, pk):
 
 def loginUser(request):
 
+    page = 'login'
+
     if request.user.is_authenticated:
         return redirect('profiles')
 
     if request.method == 'POST':
-        username = request.POST['username']   # Throwing error
+        username = request.POST['username']
         # username = request.POST.get('username')
-        password = request.POST['password']   # Throwing error
+        password = request.POST['password']
         # password = request.POST.get('password')
 
         # IF the username exists authenticate the username and password
@@ -50,7 +53,7 @@ def loginUser(request):
             login(request, user)
         else:
             # print('Username or Password is incorrect')
-            messages.error(request, 'Username OR password is incorrect')
+            messages.error(request, 'Username OR Password is incorrect')
 
         return redirect('profiles')
     return render(request, 'users/login-register.html')
@@ -60,3 +63,27 @@ def logoutUser(request):
     logout(request)
     messages.info(request, 'User was logged out!')
     return redirect('login')
+
+
+def registerUser(request):
+    page = 'register'
+    form = CustomUserCreationForm()
+
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+
+            messages.success(
+                request, 'Congratulations, Your Account has been created.')
+
+            login(request, user)
+            return redirect('profiles')
+
+        else:
+            messages.error(request, 'error')
+
+    context = {'page': page, 'form': form}
+    return render(request, 'users/login-register.html', context)
