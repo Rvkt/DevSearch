@@ -3,22 +3,23 @@
 <!-- Main Section -->
 <main class="formPage my-xl">
     <div class="content-box">
-        <h2>Project Form</h2>
+        <h2>Skill Form</h2>
         <div class="formWrapper">
-            <a class="backButton" href="{% url 'projects' %}"><i class="fa-solid fa-arrow-left"></i></i></a>
+            <a class="backButton" href="{% url 'account' %}"><i class="fa-solid fa-arrow-left"></i></a>
             <br />
-            <form class="form" action="" method="POST" enctype="multipart/form-data">
-                <!-- Input:Text -->
+
+            <form class="form" method="POST" action="">
                 {% csrf_token %} {% for field in form %}
                 <div class="form__field">
-                    <label for="formInput#text">{{ field.label }}</label>
-                    {{ field }}
+                    <label for="formInput#text"> {{field.label}}</label>
+                    {{field}}
                 </div>
                 {% endfor %}
+
                 <input class="btn btn--sub btn--lg my-md" type="submit" value="Submit" />
             </form>
         </div>
     </div>
 </main>
 
-{% endblock %}
+{% endblock content %}

@@ -8,7 +8,7 @@
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-        <!-- Icon - IconMonster -->
+        <!-- Icon - Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
         <!-- Mumble UI -->
         <link rel="stylesheet" href="{% static 'uikit/styles/uikit.css' %}" />
@@ -19,16 +19,12 @@
         <title>DevSearch</title>
     </head>
     <body>
-        {% include 'navbar.html' %}
+        {% include 'navbar.html' %} {% if messages %} {% for message in messages %}
+        <div class="alert  alert--{{message.tags}}">
+            <p class="alert__message">{{message}}</p>
+            <button class="alert__close">x</button>
+        </div>
 
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-
-        {% block content %} {% endblock content %}
+        {% endfor %} {% endif %} {% block content %} {% endblock content %}
     </body>
 </html>
