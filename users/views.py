@@ -6,8 +6,9 @@ from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.urls import conf
 
-from .models import Profile
 from .forms import CustomUserCreationForm, ProfileForm, SkillForm
+from .models import Profile, Skill
+from .utils import paginateProfiles, searchProfiles
 
 
 def loginUser(request):
@@ -74,8 +75,11 @@ def registerUser(request):
 
 
 def profiles(request):
-    profiles = Profile.objects.all()
-    context = {'profiles': profiles}
+
+    profiles, search_query = searchProfiles(request)
+
+    context = {'profiles': profiles, 'search_query': search_query}
+
     return render(request, 'users/profiles.html', context)
 
 
