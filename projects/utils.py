@@ -42,7 +42,7 @@ def searchProjects(request):
 
     tags = Tag.objects.filter(name__icontains=search_query)
 
-    projects = Project.objects.filter(
+    projects = Project.objects.distinct().filter(
         Q(title__icontains=search_query) |
         Q(description__icontains=search_query) |
         Q(owner__name__icontains=search_query) |

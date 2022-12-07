@@ -15,7 +15,7 @@
         <!-- Dev Search UI -->
         <link rel="stylesheet" href="{% static 'styles/app.css' %}" />
         <!-- <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/main.css' %}" />  -->
-        <!-- <script src="main.js"></script> -->
+        <!-- <script src="{% static 'js/main.js' %}"></script> -->
         <title>DevSearch</title>
     </head>
     <body>
@@ -27,4 +27,6 @@
 
         {% endfor %} {% endif %} {% block content %} {% endblock content %}
     </body>
+    <!-- <script src="{% static 'uikit/js/app.js' %}"></script> -->
+    <script src="{% static 'js/main.js' %}"></script>
 </html>
